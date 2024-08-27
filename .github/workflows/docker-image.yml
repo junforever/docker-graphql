@@ -31,12 +31,14 @@ jobs:
       run: |
         echo "Iniciando build"
         docker image build -t jun4ever/graphql-actions:0.0.2 .
+        docker image build -t jun4ever/graphql-actions:latest .
         echo "Build exitoso"
 
     - name: Push Docker Image
       run: |
         echo "Iniciando push"
         docker push jun4ever/graphql-actions:0.0.2
+        docker push jun4ever/graphql-actions:latest
         echo "Push exitoso"
 
         
