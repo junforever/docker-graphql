@@ -38,19 +38,23 @@ jobs:
         echo "Login exitoso"
         echo "New version: $NEW_VERSION !!!!!!!!"
 
-    # - name: Build Docker Image
-    #   run: |
-    #     echo "Iniciando build"
-    #     docker image build -t jun4ever/graphql-actions:0.0.2 .
-    #     docker image build -t jun4ever/graphql-actions:latest .
-    #     echo "Build exitoso"
+    - name: Build Docker Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        echo "Iniciando build"
+        docker image build -t jun4ever/graphql-actions:$NEW_VERSION .
+        docker image build -t jun4ever/graphql-actions:latest .
+        echo "Build exitoso"
 
-    # - name: Push Docker Image
-    #   run: |
-    #     echo "Iniciando push"
-    #     docker push jun4ever/graphql-actions:0.0.2
-    #     docker push jun4ever/graphql-actions:latest
-    #     echo "Push exitoso"
+    - name: Push Docker Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        echo "Iniciando push"
+        docker push jun4ever/graphql-actions:$NEW_VERSION
+        docker push jun4ever/graphql-actions:latest
+        echo "Push exitoso"
 
         
         
